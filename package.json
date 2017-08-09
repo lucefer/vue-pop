@@ -1,0 +1,20 @@
+{
+  "name": "vue-pop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "demo": "NODE_ENV=dev webpack-dev-server --devtool eval --progress --config ./webpack.demo.config.js --colors --hot --inline -w --host 0.0.0.0",
+    "build": "NODE_ENV=production webpack --config ./webpack.demo.config.js --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucefer/vue-pop.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucefer/vue-pop/issues"
+  },
+  "homepage": "https://github.com/lucefer/vue-pop#readme"
+}
