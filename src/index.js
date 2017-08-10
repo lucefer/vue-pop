@@ -1,4 +1,5 @@
-let enlarger = require('./enlarger');
+let enlargerObject = require('./enlarger');
+let enlarger = enlargerObject.enlarger;
 (function() {
     let vuePop = {}
 
@@ -42,10 +43,10 @@ let enlarger = require('./enlarger');
                 enlarger.update(el)
             },
             inserted: function(el) {
-                enlarger.enlarger.bind(el)
+                enlarger.bind(el)
             },
             unbind: function() {
-                enlarger.enlarger.unbind(el)
+                enlarger.unbind(el)
             }
         })
     }

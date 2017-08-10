@@ -80,7 +80,7 @@ function copyStyle(styles, targetEle, rect) {
         height: rect.height + 'px',
         display: targetStyles.display == 'inline' ? 'inline-block' : targetStyles.display,
         visibility: 'hidden'
-    });
+    })
     if (targetStyles.display == 'inline') {
         setStyle(holder, {
             height: (rect.height - paddingBottom - paddingTop) + 'px'
