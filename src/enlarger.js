@@ -34,18 +34,7 @@ function resetRect() {
     viewRect.height = docHeight
 }
 window.addEventListener("resize", resetRect)
-let options = {
-    bgColor: '#FFF',
-    transitionDuration: '0.5s',
-    transitionTimingFunction: 'cubic-bezier(0.5,0,0,1)',
-    zoomWidth: docWidth / 2,
-    zoomHeight: window.innerHeight / 2,
-    beforeOpened: null,
-    beforeClosed: null,
-    afterOpened: null,
-    afterClosed: null,
-    opacity: .5
-}
+
 let transitionPrefix = helper.getTransition(),
     transitionProp = transitionPrefix.transition,
     transformProp = transitionPrefix.transform,
@@ -79,9 +68,10 @@ var enlarger = {
 
         parentEle = targetEle.parentNode
 
-        var box = targetEle.getBoundingClientRect()
+        let box = targetEle.getBoundingClientRect()
 
         targetInsteadHolder = helper.copyStyle(stylesCausedReflow, targetEle, box);
+        targetInsteadHolder.style.visibility = 'hidden'
         var disX = box.left - (docWidth - box.width) / 2,
             disY = box.top - (docHeight - box.height) / 2;
         oldStyle = helper.setStyle(targetEle, {
@@ -93,6 +83,8 @@ var enlarger = {
             marginTop: -box.height / 2 + "px",
             marginLeft: -box.width / 2 + "px",
             cursor: browserPrefix + "zoom-out",
+            webkitTransform: 'translate(' + disX + 'px,' + disY + 'px)',
+            webkitTransition: '',
             transform: 'translate(' + disX + 'px,' + disY + 'px)',
             transition: '',
             whiteSpace: 'nowrap'
@@ -104,10 +96,13 @@ var enlarger = {
         mask.style.display = "block"
         targetEle.offsetWidth
         mask.style.opacity = options.opacity
-        scale = Math.min(options.zoomWidth / box.width, options.zoomHeight / box.height)
+
+        scale = Math.min(options.width / box.width, options.height / box.height)
         helper.setStyle(targetEle, {
+            webkitTransform: 'scale(' + scale + ')',
             transform: 'scale(' + scale + ')',
-            transition: transformCssProp + ' ' + options.transitionDuration + ' ' + options.transitionTimingFunction
+            webkitTransition: '-webkit-transform ' + options.transitionDuration + ' ' + options.transitionTimingFunction,
+            transition: 'transform '  + options.transitionDuration + ' ' + options.transitionTimingFunction
         })
 
         targetEle.addEventListener(transEndEvent, function end() {
@@ -132,6 +127,7 @@ var enlarger = {
 
         mask.style.opacity = 0
         helper.setStyle(targetEle, {
+            webkitTransform: 'translate(' + dx + 'px,' + dy + 'px)',
             transform: 'translate(' + dx + 'px,' + dy + 'px)'
         })
 
@@ -139,6 +135,7 @@ var enlarger = {
             targetEle.removeEventListener(transEndEvent, end)
 
             helper.setStyle(targetEle, helper.extendStyle(oldStyle, {
+                webkitTransform: 'none',
                 transform: 'none'
             }))
 
@@ -147,7 +144,7 @@ var enlarger = {
             parentEle.removeChild(targetWrapper)
 
             mask.style.display = "none"
-            targetInsteadHolder = null
+                // targetInsteadHolder = null
 
             shown = locked = false
             if (targetEle.popData.afterClosed && typeof targetEle.popData.afterClosed === 'function')

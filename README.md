@@ -18,3 +18,9 @@ Vue.use(vuePop)
   <img  src= "./images/photo.jpg" />
 </span>
 ```
+#### 可选参数
+* bgColor: 遮罩层背景色
+* afterOpened: 放大后的钩子函数
+* afterClosed: 还原到原来大小的钩子函数
+* width: 放大后的宽度
+* height: 放大后的高度

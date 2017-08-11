@@ -5,8 +5,7 @@ let enlarger = enlargerObject.enlarger;
 
 
     function setBinding(binding) {
-        this.zoomWidth = Math.ceil(window.innerWidth / 2)
-        this.zoomHeight = Math.ceil(window.innerHeight / 2)
+
         if(!binding){
           this.bgColor = '#000'
           this.transitionDuration = '0.5s'
@@ -14,6 +13,8 @@ let enlarger = enlargerObject.enlarger;
           this.afterOpened = null
           this.afterClosed = null
           this.opacity = .5
+          this.width = Math.ceil(document.body.getBoundingClientRect().width / 2)
+          this.height = Math.ceil(window.innerHeight / 2)
           return
         }
         this.bgColor = binding.bgColor || '#000'
@@ -22,6 +23,8 @@ let enlarger = enlargerObject.enlarger;
         this.opacity = .5
         this.afterOpened = binding.afterOpened || null
         this.afterClosed = binding.afterClosed || null
+        this.width = binding.width || Math.ceil(document.body.getBoundingClientRect().width / 2)
+        this.height = binding.height || Math.ceil(window.innerHeight / 2)
     }
 
     function Data(binding) {

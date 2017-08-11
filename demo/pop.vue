@@ -48,10 +48,10 @@
       hide(data) {
       },
       opened(){
-        alert('显示了')
+        //alert('显示了')
       },
       closed(){
-        alert('隐藏了')
+        //alert('隐藏了')
       },
       change(){
         this.list = [

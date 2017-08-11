@@ -1,6 +1,6 @@
-var ret = {}
-
-function getTransition() {
+let ret = {}
+let holder = document.createElement('div')
+ function getTransition() {
     let trans = ['webkitTransition', 'transition', 'MozTransition'],
         tform = ['webkitTransform', 'transform', 'MozTransform'],
         end = {
@@ -56,11 +56,10 @@ function extendStyle(originalstyle, targetStyle) {
 }
 
 function copyStyle(styles, targetEle, rect) {
-
-    var holder = document.createElement('div'),
-        targetStyles = getComputedStyle(targetEle),
-        l = styles.length,
-        key;
+    holder.style.cssText = ''
+    let targetStyles = getComputedStyle(targetEle),
+      l = styles.length,
+      key;
 
     while (l--) {
         key = styles[l];
